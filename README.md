@@ -1,5 +1,5 @@
-# animate-project
-
+# VueSimpleAnimater
+vue-simple-animater is used to solve view changes in an area through animation interaction
 ## Project setup
 ```
 npm install
@@ -7,7 +7,7 @@ npm install
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+npm run dev
 ```
 
 ### Compiles and minifies for production
@@ -19,6 +19,3 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
