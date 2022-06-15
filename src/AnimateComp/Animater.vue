@@ -3,7 +3,8 @@
 </template>
 
 <script>
-import { nextTick, provide, ref, watch } from 'vue'
+import { nextTick, onMounted, provide, ref, watch } from 'vue'
+import { throttle } from 'lodash'
 export default {
    props: {
       data: {
@@ -29,6 +30,9 @@ export default {
          },
          remove(animatedId) {
             prevNodeList.value.delete(animatedId);
+         },
+         update(animatedId, animatedItem) {
+            prevNodeList.value.set(animatedId, animatedItem)
          },
          nextId() {
             return (uniqueIdRef.value += 1);
@@ -91,6 +95,15 @@ export default {
                prevNodeList.value.get(animateId).rect = currentRect
             })
          })
+      });
+
+
+      onMounted(() => {
+         window.onresize = throttle(() => {
+            prevNodeList.value.forEach((node) => {
+               node.rect = node.node.getBoundingClientRect();
+            });
+         }, 500)
       });
 
       return {

@@ -2,6 +2,7 @@
    <div>
         <button @click="handleShuffle">乱序</button>
         <button @click="handleRecover">重置</button>
+        <button @click="handleAdd">新增</button>
         <Animater :data="initData" :duration="1000">
             <div class="SquareBox" ref="listRef">
                 <Animated v-for="(num) in initData" :key="num">
@@ -17,7 +18,7 @@ import { reactive, toRefs } from 'vue';
 import Animater from '../../AnimateComp/Animater.vue';
 import Animated from '../../AnimateComp/Animated.vue';
 import AnimateItem from '../../components/Amimate-item.vue';
-import { shuffle } from 'lodash';
+import { shuffle, range } from 'lodash';
 export default {
     components: {
         Animater,
@@ -35,10 +36,14 @@ export default {
         const handleRecover = () => {
             state.initData = initConfig;
         }
+        const handleAdd = () => {
+            state.initData = range(state.initData.length, state.initData.length + 10).concat(state.initData)
+        }
         return {
             ...toRefs(state),
             handleShuffle,
-            handleRecover
+            handleRecover,
+            handleAdd,
         }
     },
 }
