@@ -2,7 +2,7 @@
    <div>
         <button @click="handleShuffle">乱序</button>
         <button @click="handleRecover">重置</button>
-        <Animater :data="initData">
+        <Animater :data="initData" :duration="1000">
             <div class="SquareBox" ref="listRef">
                 <Animated v-for="(num) in initData" :key="num">
                     <AnimateItem :num="num">{{ num }}</AnimateItem>
@@ -33,7 +33,7 @@ export default {
             state.initData = shuffle(state.initData);
         };
         const handleRecover = () => {
-            state.initData = [2,1,3,4,5,6,7,8,9,10];
+            state.initData = initConfig;
         }
         return {
             ...toRefs(state),

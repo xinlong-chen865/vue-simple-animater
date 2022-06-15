@@ -13,7 +13,7 @@ export default {
       const animateId = ctx.nextId();
       onMounted(() => {
          if (ctx) {
-            ctx.add({ animateId, node: currentRef.value });
+            ctx.add({ animateId, node: currentRef.value, rect: currentRef.value.getBoundingClientRect() });
          }
       });
       

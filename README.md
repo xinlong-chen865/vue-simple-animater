@@ -1,5 +1,6 @@
 # VueSimpleAnimater
-vue-simple-animater is used to solve view changes in an area through animation interaction
+vue-simple-animater is used to solve view changes in an area through animation interaction.
+Page 1 is written through native conversion, and page 2 is written through vue-simple-animater components
 ## Project setup
 ```
 npm install

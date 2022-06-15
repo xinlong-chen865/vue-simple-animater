@@ -1,7 +1,5 @@
 <template>
-   <div>
-      <slot></slot>
-   </div>
+   <slot></slot>
 </template>
 
 <script>
@@ -11,6 +9,14 @@ export default {
       data: {
          type: Array,
          default: () => ([])
+      },
+      duration: {
+         type: Number,
+         default: 400,
+      },
+      animateOptions: {
+         type: Object,
+         default: () => ({})
       }
    },
    setup(props) {
@@ -76,22 +82,16 @@ export default {
                      { transform: "translate(0, 0)" },
                   ],
                   {
-                     duration: 1000,
+                     duration: props.duration,
                      easing: "cubic-bezier(0.25, 0.8, 0.25, 1)",
+                     ...props.animateOptions,
                   }
                );
+               // 轮回更替
+               prevNodeList.value.get(animateId).rect = currentRect
             })
          })
       });
-
-      watch(() => props.data, () => {
-         nextTick(() => {
-            prevNodeList.value.forEach((item) => {
-               item.rect = item.node.getBoundingClientRect();
-            })
-         });
-         
-      }, { immediate: true });
 
       return {
          prevNodeList,
