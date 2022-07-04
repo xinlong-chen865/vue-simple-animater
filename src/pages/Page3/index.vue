@@ -6,7 +6,7 @@
         <Animater :data="initData" :duration="1000">
             <div class="SquareBox" ref="listRef">
                 <Animated v-for="(num) in initData" :key="num">
-                    <AnimateItem :num="num">{{ num }}</AnimateItem>
+                    <div class="row">{{ num }}</div>
                 </Animated>
             </div>
         </Animater>
@@ -17,18 +17,16 @@
 import { reactive, toRefs } from 'vue';
 import Animater from '../../AnimateComp/Animater.vue';
 import Animated from '../../AnimateComp/Animated.vue';
-import AnimateItem from '../../components/Amimate-item.vue';
-import { shuffle, range, cloneDeep } from 'lodash';
+import { shuffle, cloneDeep, range } from 'lodash';
 export default {
     components: {
         Animater,
         Animated,
-        AnimateItem,
     },
     setup() {
         const initConfig = [1,2,3,4,5,6,7,8,9,10]
         const state = reactive({
-            initData: initConfig,
+            initData: cloneDeep(initConfig),
         });
         const handleShuffle = () => {
             state.initData = shuffle(state.initData);
@@ -37,7 +35,7 @@ export default {
             state.initData = cloneDeep(initConfig);
         }
         const handleAdd = () => {
-            state.initData = range(state.initData.length, state.initData.length + 10).concat(state.initData)
+            state.initData = range(state.initData.length, state.initData.length + 1).concat(state.initData)
         }
         return {
             ...toRefs(state),
@@ -50,8 +48,12 @@ export default {
 </script>
 
 <style scoped>
-.SquareBox {
+.row {
+    width: 100%;
+    height: 80px;
+    border: 1px solid #eee;
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 </style>
