@@ -97,13 +97,12 @@ export default {
          })
       });
 
-
       onMounted(() => {
          window.onresize = throttle(() => {
-            prevNodeList.value.forEach((node) => {
-               node.rect = node.node.getBoundingClientRect();
+            prevNodeList.value.forEach((node, key) => {
+               prevNodeList.value.get(key).rect = node.node.getBoundingClientRect();
             });
-         }, 500)
+         }, 500);
       });
 
       return {
