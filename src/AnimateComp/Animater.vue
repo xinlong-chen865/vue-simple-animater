@@ -5,6 +5,7 @@
 <script>
 import { nextTick, onMounted, provide, ref, watch } from 'vue'
 import { throttle } from 'lodash'
+import { transform } from "./utils/transform";
 export default {
    props: {
       data: {
@@ -78,19 +79,9 @@ export default {
                if (invert.left === 0 && invert.right === 0 ) {
                   return;
                }
-               node.animate(
-                  [
-                     {
-                        transform: `translate(${invert.left}px, ${invert.top}px)`,
-                     },
-                     { transform: "translate(0, 0)" },
-                  ],
-                  {
-                     duration: props.duration,
-                     easing: "cubic-bezier(0.25, 0.8, 0.25, 1)",
-                     ...props.animateOptions,
-                  }
-               );
+
+               // 动画
+               transform(node, invert, props.duration, props.animateOptions);
                // 轮回更替
                prevNodeList.value.get(animateId).rect = currentRect
             })
