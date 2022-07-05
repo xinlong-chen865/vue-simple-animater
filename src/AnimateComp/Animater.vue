@@ -89,11 +89,11 @@ export default {
       });
 
       onMounted(() => {
-         window.onresize = throttle(() => {
+         window?.addEventListener('resize', throttle(() => {
             prevNodeList.value.forEach((node, key) => {
                prevNodeList.value.get(key).rect = node.node.getBoundingClientRect();
             });
-         }, 500);
+         }, 500));
       });
 
       return {
